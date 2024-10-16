@@ -9,6 +9,8 @@ import java.util.logging.*;
 
 public class PathManager {
 
+    private static path currentPath;  
+
     public static void main(String[] args) {
         // creating a new jframe for main window
         JFrame frame = new JFrame();
@@ -59,8 +61,9 @@ public class PathManager {
         submitButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                String path = pathInputField.getText();
-                System.out.println("Path is set to: " + path);
+                String pathString = pathInputField.getText();
+                currentPath = new path(pathString);  // Create a new path object
+                currentPath.currentPath();
             }
         });
 
@@ -114,7 +117,7 @@ public class PathManager {
         });
 
         
-
+        
 
         frame.setVisible(true);
     }
