@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.FlowLayout;
 import java.awt.event.*;
+import java.util.logging.*;
 
 public class PathManager {
 
