@@ -25,16 +25,16 @@ public class PathManager {
         topMenuPanel.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 
         // creating buttons for the top menu panel
-        JButton DirectoryCleanser = GUIStyle.createStyledButton("Directory Cleanser");
-        JButton FileRenamer = GUIStyle.createStyledButton("File Renamer");
-        JButton FileMover = GUIStyle.createStyledButton("File Mover");
-        JButton Console = GUIStyle.createStyledButton("Console");
+        JButton DirectoryCleanserButton = GUIStyle.createStyledButton("Directory Cleanser");
+        JButton FileRenamerButton = GUIStyle.createStyledButton("File Renamer");
+        JButton FileMoverButton = GUIStyle.createStyledButton("File Mover");
+        JButton ConsoleButton = GUIStyle.createStyledButton("Console");
 
         // adding buttons to the top menu panel
-        topMenuPanel.add(DirectoryCleanser);
-        topMenuPanel.add(FileRenamer);
-        topMenuPanel.add(FileMover);
-        topMenuPanel.add(Console);
+        topMenuPanel.add(DirectoryCleanserButton);
+        topMenuPanel.add(FileRenamerButton);
+        topMenuPanel.add(FileMoverButton);
+        topMenuPanel.add(ConsoleButton);
 
         // adding the top menu panel to the frame
         frame.add(topMenuPanel, BorderLayout.NORTH);
@@ -54,15 +54,66 @@ public class PathManager {
 
         // creating a submit button
         JButton submitButton = styledButton("Submit", GUIStyle.BUTTON_COLOR, GUIStyle.TEXT_COLOR);
-        
+
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                String path = pathInputField.getText();
+                System.out.println("Path is set to: " + path);
+            }
+        });
 
         // adding components to the path input panel
         pathInputPanel.add(pathLabel);
         pathInputPanel.add(pathInputField);
         pathInputPanel.add(submitButton);
+       
 
-        // adding the path input panel to the frame
-        frame.add(pathInputPanel, BorderLayout.CENTER);
+        //creating a label for the words to be targeted
+        JLabel targetWordInputLabel = new JLabel("Enter specific words to be targeted:");
+        targetWordInputLabel.setForeground(GUIStyle.TEXT_COLOR);
+        targetWordInputLabel.setFont(new Font("Arial", Font.PLAIN, 12));
+
+        // creating a text area for the words to be targeted
+        JTextField targetWordInputArea = new JTextField(30);
+        targetWordInputArea.setForeground(GUIStyle.TEXT_COLOR);
+        targetWordInputArea.setBackground(GUIStyle.BACKGROUND_COLOR);
+
+         // buttons to locate the words that are targeted in the entered path
+         JButton locateWordsButton = GUIStyle.createStyledButton("Locate in Path"); // button to show the files and folders that contain the targeted words
+         JButton removeWordsButton = GUIStyle.createStyledButton("Remove Relevant Files & Folders"); // button to remove the files and folders that contain the targeted words
+ 
+        
+        // main panel for input fields for words to be targeted
+        JPanel targetWordPanel = new JPanel(new FlowLayout(FlowLayout.CENTER,10,15));
+        targetWordPanel.setBackground(GUIStyle.BACKGROUND_COLOR);
+        targetWordPanel.add(targetWordInputLabel);
+        targetWordPanel.add(targetWordInputArea);
+        targetWordPanel.add(locateWordsButton);
+        targetWordPanel.add(removeWordsButton);
+
+         // creating a combined panel for the directory cleanser
+         JPanel combinedPanel1 = new JPanel(new BorderLayout());
+         combinedPanel1.setBackground(GUIStyle.BACKGROUND_COLOR);
+         combinedPanel1.add(pathInputPanel, BorderLayout.NORTH);
+         combinedPanel1.add(targetWordPanel, BorderLayout.CENTER);
+
+ 
+        
+        DirectoryCleanserButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.add(combinedPanel1 , BorderLayout.CENTER);
+
+                // to ensure that the dynamic changes are correctly displayed
+                frame.revalidate();
+                frame.repaint();
+                
+            }
+        });
+
+        
+
 
         frame.setVisible(true);
     }
