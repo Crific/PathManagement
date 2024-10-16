@@ -28,13 +28,13 @@ public class PathManager {
         JButton DirectoryCleanserButton = GUIStyle.createStyledButton("Directory Cleanser");
         JButton FileRenamerButton = GUIStyle.createStyledButton("File Renamer");
         JButton FileMoverButton = GUIStyle.createStyledButton("File Mover");
-        JButton ConsoleButton = GUIStyle.createStyledButton("Console");
+    
 
         // adding buttons to the top menu panel
         topMenuPanel.add(DirectoryCleanserButton);
         topMenuPanel.add(FileRenamerButton);
         topMenuPanel.add(FileMoverButton);
-        topMenuPanel.add(ConsoleButton);
+
 
         // adding the top menu panel to the frame
         frame.add(topMenuPanel, BorderLayout.NORTH);
